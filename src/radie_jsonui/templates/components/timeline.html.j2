@@ -1,0 +1,20 @@
+<section id="{{ section.id or '' }}" class="py-5">
+  {% if section.title %}
+    <h2 class="mb-4">{{ section.title }}</h2>
+  {% endif %}
+  <div class="list-group">
+    {% for item in section.events %}
+    <div class="list-group-item">
+      <div class="d-flex w-100 justify-content-between">
+        <div class="json2ui-timeline__marker {{ item.status or '' }}"></div>
+        <div>
+          <p class="small text-uppercase text-muted mb-1">
+            {{ item.timestamp or item.status or "" }}
+          </p>
+          <h5 class="mb-1">{{ item.title }}</h5>
+          <p class="text-muted mb-0">{{ item.description }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>

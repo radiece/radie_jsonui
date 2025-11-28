@@ -1,0 +1,74 @@
+:root {
+  font-family: var(--json2ui-font, Inter, system-ui);
+}
+
+body {
+  background: var(--json2ui-muted);
+  font-size: var(--json2ui-base-size, 1rem);
+}
+
+.container {
+  max-width: var(--json2ui-max-width, 960px);
+}
+
+.json2ui-markdown {
+  padding: var(--json2ui-gutter, 1.5rem);
+  border-radius: var(--json2ui-radius, 0.75rem);
+  background: #fff;
+  box-shadow: 0 25px 45px rgba(15, 23, 42, 0.08);
+}
+
+.json2ui-markdown--muted {
+  background: var(--json2ui-muted);
+}
+
+.json2ui-markdown h1,
+.json2ui-markdown h2,
+.json2ui-markdown h3,
+.json2ui-markdown h4 {
+  font-family: var(--json2ui-font-headings, Inter);
+  font-weight: 600;
+}
+
+.json2ui-timeline {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.json2ui-timeline::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(13, 110, 253, 0.2);
+}
+
+.json2ui-timeline__item {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.json2ui-timeline__marker {
+  position: absolute;
+  left: -2px;
+  top: 5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--json2ui-primary, #0d6efd);
+}
+
+.json2ui-timeline__marker.done {
+  background: #198754;
+}
+
+.json2ui-timeline__marker.pending {
+  background: #6c757d;
+}
+
+.json2ui-timeline__marker.active {
+  background: #0d6efd;
+}

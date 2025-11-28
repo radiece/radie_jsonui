@@ -1,0 +1,13 @@
+{% from "macros/render.html.j2" import render_section %}
+
+<section id="{{ section.id or '' }}" class="py-4">
+  <div class="row g-4">
+    {% for col in section.columns %}
+    <div class="{{ col.width if col.width is string else 'col-' ~ col.width }}">
+      {% for child in col.sections %}
+        {{ render_section(child) }}
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</section>

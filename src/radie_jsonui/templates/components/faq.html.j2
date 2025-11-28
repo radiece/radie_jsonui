@@ -1,0 +1,32 @@
+<section id="{{ section.id or '' }}" class="py-5">
+  {% if section.title %}
+    <h2 class="mb-4">{{ section.title }}</h2>
+  {% endif %}
+  <div class="accordion" id="faq-{{ section.id or 'accordion' }}">
+    {% for item in section.faqs %}
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faq-{{ loop.index }}">
+          <button
+            class="accordion-button {{ 'collapsed' if not loop.first }}"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#faq-collapse-{{ loop.index }}"
+            aria-expanded="{{ 'true' if loop.first else 'false' }}"
+            aria-controls="faq-collapse-{{ loop.index }}"
+          >
+            {{ item.question }}
+          </button>
+        </h2>
+        <div
+          id="faq-collapse-{{ loop.index }}"
+          class="accordion-collapse collapse {{ 'show' if loop.first }}"
+          data-bs-parent="#json2uiFaq"
+        >
+          <div class="accordion-body">
+            {{ item.answer }}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>

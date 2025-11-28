@@ -1,0 +1,23 @@
+<section id="{{ section.id or '' }}" class="py-4">
+  <div class="alert alert-{{ section.variant }} shadow-sm" role="alert">
+    <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-3">
+      <div>
+        <h4 class="alert-heading mb-2">{{ section.title }}</h4>
+        <p class="mb-0">{{ section.body }}</p>
+      </div>
+      {% if section.actions %}
+        <div class="ms-lg-auto">
+          {% for action in section.actions %}
+            <a
+              class="btn btn-outline-light text-body me-2"
+              href="{{ action.href }}"
+              {% if action.external %}target="_blank" rel="noreferrer noopener"{% endif %}
+            >
+              {{ action.label }}
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

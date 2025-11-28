@@ -1,0 +1,130 @@
+{
+  "$schema": "../schema.json",
+  "meta": {
+    "title": "Radie Docs Starter",
+    "description": "Example site generated via radie_jsonui.",
+    "language": "en",
+    "favicon": "https://fav.farm/⚡"
+  },
+  "theme": {
+    "colors": {
+      "primary": "#0d6efd",
+      "secondary": "#6610f2",
+      "surface": "#ffffff",
+      "muted": "#f8f9fa"
+    },
+    "typography": {
+      "fontFamily": "Inter, system-ui, -apple-system, BlinkMacSystemFont",
+      "headingsFont": "Space Grotesk, Inter, sans-serif"
+    },
+    "layout": {
+      "maxWidth": "960px",
+      "gutter": "1.5rem",
+      "radius": "0.75rem"
+    }
+  },
+  "navigation": {
+    "brand": "Radie Docs",
+    "links": [
+      { "label": "Overview", "href": "#overview" },
+      { "label": "API", "href": "#api" },
+      { "label": "GitHub", "href": "https://github.com/", "external": true }
+    ]
+  },
+  "pages": [
+    {
+      "path": "index.html",
+      "title": "Home",
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "heading": "Ship product docs from JSON.",
+          "subheading": "Drop a JSON file in your repo and let radie_jsonui render beautiful documentation automatically.",
+          "actions": [
+            {
+              "label": "Get started",
+              "href": "#overview",
+              "variant": "primary"
+            },
+            {
+              "label": "View source",
+              "href": "https://github.com/",
+              "variant": "link"
+            }
+          ],
+          "media": {
+            "src": "https://placehold.co/600x360",
+            "alt": "Dashboard preview"
+          }
+        },
+        {
+          "id": "overview",
+          "type": "markdown",
+          "content": "### Why radie_jsonui?\n\n- Declarative JSON schema\n- Bootstrap 5 UI kit\n- CLI automation friendly"
+        },
+        {
+          "type": "cards",
+          "title": "Capabilities",
+          "items": [
+            {
+              "title": "Composable sections",
+              "body": "Hero blocks, Markdown, stats, FAQs, callouts, and more.",
+              "icon": "bi-layout-text-window"
+            },
+            {
+              "title": "Modern styling",
+              "body": "Bootstrap 5 defaults + custom theme tokens.",
+              "icon": "bi-stars"
+            },
+            {
+              "title": "Automation ready",
+              "body": "Use in CI/CD to rebuild docs from structured data.",
+              "icon": "bi-gear-fill"
+            }
+          ]
+        },
+        {
+          "id": "stats",
+          "type": "stats",
+          "items": [
+            { "label": "Components", "value": "8" },
+            { "label": "CLS", "value": "< 0.1" },
+            { "label": "Time to ship", "value": "5 min" }
+          ]
+        },
+        {
+          "type": "code",
+          "title": "Rendering snippet",
+          "language": "bash",
+          "content": "json-to-ui generate docs.json --out build/docs"
+        },
+        {
+          "type": "faq",
+          "title": "FAQ",
+          "items": [
+            {
+              "question": "Can I extend components?",
+              "answer": "Yes, add new Jinja component templates and update the renderer registry."
+            },
+            {
+              "question": "Does it support CI?",
+              "answer": "Absolutely. The CLI exits non-zero on validation failures to gate deployments."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "footer": {
+    "text": "© 2025 Radie Labs. Built with radie_jsonui.",
+    "links": [
+      { "label": "Docs", "href": "#hero" },
+      {
+        "label": "Status",
+        "href": "https://status.example.com",
+        "external": true
+      }
+    ]
+  }
+}

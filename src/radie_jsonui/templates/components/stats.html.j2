@@ -1,0 +1,18 @@
+<section id="{{ section.id or '' }}" class="py-5">
+  {% if section.title %}
+    <h2 class="mb-4 text-center">{{ section.title }}</h2>
+  {% endif %}
+  <div class="container">
+    <div class="row text-center">
+    {% for stat in section.stats %}
+      <div class="col-md-3 text-center">
+        <div class="display-5 fw-bold text-primary">{{ stat.value }}</div>
+        <p class="text-uppercase small text-muted mb-1">{{ stat.label }}</p>
+        {% if stat.description %}
+          <p class="text-muted mb-0">{{ stat.description }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+</section>

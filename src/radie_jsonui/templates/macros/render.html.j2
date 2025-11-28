@@ -1,0 +1,3 @@
+{% macro render_section(section) %}
+  {% include "components/" ~ section.type ~ ".html.j2" %}
+{% endmacro %}

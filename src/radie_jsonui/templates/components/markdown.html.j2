@@ -1,0 +1,5 @@
+<section id="{{ section.id or '' }}" class="py-4">
+  <div class="json2ui-markdown json2ui-markdown--{{ section.background }}">
+    {{ section.rendered_html | safe }}
+  </div>
+</section>

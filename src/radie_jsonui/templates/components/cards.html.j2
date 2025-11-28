@@ -1,0 +1,35 @@
+<section id="{{ section.id or '' }}" class="py-5">
+  {% if section.title %}
+    <div class="text-center mb-4">
+      <h2 class="mb-4">{{ section.title }}</h2>
+    </div>
+  {% endif %}
+  <div class="row g-4">
+    {% for card in section.cards %}
+      <div class="{{ 'col-md-4' if section.layout == 'grid' else 'col-12' }}">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-body">
+            {% if card.badge %}
+              <span class="badge bg-primary-subtle text-primary-emphasis mb-2">{{ card.badge }}</span>
+            {% endif %}
+            <h5 class="card-title">{{ card.title }}</h5>
+            <p class="card-text text-muted">{{ card.body }}</p>
+            {% if card.actions %}
+              <div class="d-flex gap-3 flex-wrap mt-3">
+                {% for action in card.actions %}
+                  <a
+                    class="btn btn-sm btn-outline-primary"
+                    href="{{ action.href }}"
+                    {% if action.external %}target="_blank" rel="noreferrer noopener"{% endif %}
+                  >
+                    {{ action.label }}
+                  </a>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>

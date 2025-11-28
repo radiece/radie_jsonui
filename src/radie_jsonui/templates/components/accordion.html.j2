@@ -1,0 +1,22 @@
+{% from "macros/render.html.j2" import render_section %}
+
+<section id="{{ section.id or '' }}" class="py-4">
+  <div class="accordion" id="accordion-{{ section._uid }}">
+    {% for item in section.panels %}
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button {{ '' if loop.first else 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ section._uid }}-{{ loop.index0 }}" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="collapse-{{ section._uid }}-{{ loop.index0 }}">
+          {{ item.title }}
+        </button>
+      </h2>
+      <div id="collapse-{{ section._uid }}-{{ loop.index0 }}" class="accordion-collapse collapse {{ 'show' if loop.first }}" data-bs-parent="#accordion-{{ section._uid }}">
+        <div class="accordion-body">
+          {% for child in item.sections %}
+            {{ render_section(child) }}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>

@@ -1,0 +1,369 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://radie-tasker.local/radie_jsonui/schema.json",
+  "title": "radie_jsonui configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["meta", "sections"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Optional reference to the schema document."
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Document title and <title> tag."
+        },
+        "description": {
+          "type": "string",
+          "description": "Short page description used for meta tags."
+        },
+        "language": {
+          "type": "string",
+          "default": "en",
+          "description": "BCP47 language code (e.g., en, fr-CA)."
+        },
+        "favicon": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "Path or URL to favicon."
+        },
+        "ogImage": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "OpenGraph social preview image."
+        }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "description": "Optional theme tokens.",
+      "additionalProperties": false,
+      "properties": {
+        "colors": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "primary": { "type": "string", "pattern": "^#?[0-9a-fA-F]{3,8}$" },
+            "secondary": {
+              "type": "string",
+              "pattern": "^#?[0-9a-fA-F]{3,8}$"
+            },
+            "surface": { "type": "string", "pattern": "^#?[0-9a-fA-F]{3,8}$" },
+            "muted": { "type": "string", "pattern": "^#?[0-9a-fA-F]{3,8}$" }
+          }
+        },
+        "typography": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "fontFamily": { "type": "string" },
+            "headingsFont": { "type": "string" },
+            "baseSize": { "type": "string" }
+          }
+        },
+        "layout": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "maxWidth": { "type": "string" },
+            "gutter": { "type": "string" },
+            "radius": { "type": "string" }
+          }
+        }
+      }
+    },
+    "navigation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "brand": { "type": "string" },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["label", "href"],
+            "additionalProperties": false,
+            "properties": {
+              "label": { "type": "string" },
+              "href": { "type": "string", "format": "uri-reference" },
+              "external": { "type": "boolean", "default": false }
+            }
+          }
+        }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/section" }
+    },
+    "footer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "text": { "type": "string" },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["label", "href"],
+            "additionalProperties": false,
+            "properties": {
+              "label": { "type": "string" },
+              "href": { "type": "string", "format": "uri-reference" },
+              "external": { "type": "boolean", "default": false }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "section": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "id": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": [
+            "hero",
+            "markdown",
+            "cards",
+            "callout",
+            "stats",
+            "code",
+            "timeline",
+            "faq"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "hero" } } },
+          "then": { "$ref": "#/$defs/hero" }
+        },
+        {
+          "if": { "properties": { "type": { "const": "markdown" } } },
+          "then": { "$ref": "#/$defs/markdown" }
+        },
+        {
+          "if": { "properties": { "type": { "const": "cards" } } },
+          "then": { "$ref": "#/$defs/cards" }
+        },
+        {
+          "if": { "properties": { "type": { "const": "callout" } } },
+          "then": { "$ref": "#/$defs/callout" }
+        },
+        {
+          "if": { "properties": { "type": { "const": "stats" } } },
+          "then": { "$ref": "#/$defs/stats" }
+        },
+        {
+          "if": { "properties": { "type": { "const": "code" } } },
+          "then": { "$ref": "#/$defs/code" }
+        },
+        {
+          "if": { "properties": { "type": { "const": "timeline" } } },
+          "then": { "$ref": "#/$defs/timeline" }
+        },
+        {
+          "if": { "properties": { "type": { "const": "faq" } } },
+          "then": { "$ref": "#/$defs/faq" }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "hero": {
+      "type": "object",
+      "required": ["heading", "subheading"],
+      "properties": {
+        "heading": { "type": "string" },
+        "subheading": { "type": "string" },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["label", "href"],
+            "properties": {
+              "label": { "type": "string" },
+              "href": { "type": "string", "format": "uri-reference" },
+              "variant": {
+                "type": "string",
+                "enum": ["primary", "secondary", "link"],
+                "default": "primary"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "media": {
+          "type": "object",
+          "required": ["src"],
+          "properties": {
+            "src": { "type": "string", "format": "uri-reference" },
+            "alt": { "type": "string" },
+            "caption": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "markdown": {
+      "type": "object",
+      "required": ["content"],
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "GitHub-flavored markdown."
+        },
+        "background": { "type": "string", "enum": ["default", "muted"] },
+        "columns": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2,
+          "default": 1
+        }
+      }
+    },
+    "cards": {
+      "type": "object",
+      "required": ["items"],
+      "properties": {
+        "title": { "type": "string" },
+        "layout": {
+          "type": "string",
+          "enum": ["grid", "list"],
+          "default": "grid"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["title", "body"],
+            "properties": {
+              "title": { "type": "string" },
+              "body": { "type": "string" },
+              "icon": { "type": "string" },
+              "badge": { "type": "string" },
+              "actions": {
+                "type": "array",
+                "items": { "$ref": "#/$defs/link" }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "callout": {
+      "type": "object",
+      "required": ["title", "body"],
+      "properties": {
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "variant": {
+          "type": "string",
+          "enum": ["info", "success", "warning", "danger"],
+          "default": "info"
+        },
+        "actions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/link" }
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "required": ["items"],
+      "properties": {
+        "title": { "type": "string" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["label", "value"],
+            "properties": {
+              "label": { "type": "string" },
+              "value": { "type": "string" },
+              "description": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "code": {
+      "type": "object",
+      "required": ["language", "content"],
+      "properties": {
+        "title": { "type": "string" },
+        "language": { "type": "string" },
+        "content": { "type": "string" },
+        "showLineNumbers": { "type": "boolean", "default": true }
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "required": ["items"],
+      "properties": {
+        "title": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["title", "description"],
+            "properties": {
+              "title": { "type": "string" },
+              "description": { "type": "string" },
+              "timestamp": { "type": "string" },
+              "status": {
+                "type": "string",
+                "enum": ["pending", "active", "done"]
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "faq": {
+      "type": "object",
+      "required": ["items"],
+      "properties": {
+        "title": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["question", "answer"],
+            "properties": {
+              "question": { "type": "string" },
+              "answer": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "link": {
+      "type": "object",
+      "required": ["label", "href"],
+      "properties": {
+        "label": { "type": "string" },
+        "href": { "type": "string", "format": "uri-reference" },
+        "external": { "type": "boolean", "default": false }
+      },
+      "additionalProperties": false
+    }
+  }
+}

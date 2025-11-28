@@ -1,0 +1,12 @@
+<section id="{{ section.id or '' }}" class="py-5">
+  {% if section.title %}
+    <h3 class="fw-semibold mb-3">{{ section.title }}</h3>
+  {% endif %}
+  <div class="card bg-dark text-white shadow-sm border-0">
+    <div class="card-body">
+      <pre class="mb-0"><code class="language-{{ section.language }}">{{
+        section.content
+      }}</code></pre>
+    </div>
+  </div>
+</section>

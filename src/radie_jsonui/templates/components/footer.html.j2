@@ -1,0 +1,22 @@
+<footer class="bg-dark text-white py-4 mt-auto">
+  <div class="container d-flex flex-column flex-md-row align-items-center gap-3">
+    <div class="text-muted small">
+      {{ footer.text or meta.title }}
+    </div>
+    {% if footer.links %}
+      <ul class="nav ms-md-auto">
+        {% for link in footer.links %}
+          <li class="nav-item">
+            <a
+              class="nav-link text-white-50"
+              href="{{ link.href }}"
+              {% if link.external %}target="_blank" rel="noreferrer noopener"{% endif %}
+            >
+              {{ link.label }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</footer>

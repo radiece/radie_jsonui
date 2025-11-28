@@ -1,0 +1,32 @@
+<section id="{{ section.id or 'hero' }}" class="py-5">
+  <div class="row align-items-center gy-4">
+    <div class="col-lg-6">
+      <p class="text-uppercase text-secondary fw-semibold small mb-2">Featured</p>
+      <h1 class="display-5 fw-bold">{{ section.heading }}</h1>
+      <p class="lead text-muted">{{ section.subheading }}</p>
+      <div class="d-flex gap-3 flex-wrap mt-4">
+        {% for action in section.actions %}
+          <a
+            class="btn btn-{{ 'outline-' if action.variant == 'secondary' else '' }}{{ action.variant if action.variant != 'link' else 'link px-0' }}"
+            href="{{ action.href }}"
+            {% if action.external %}target="_blank" rel="noreferrer noopener"{% endif %}
+          >
+            {{ action.label }}
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% if section.media %}
+      <div class="col-lg-6">
+        <div class="card shadow-sm border-0 overflow-hidden">
+          <img src="{{ section.media.src }}" class="img-fluid" alt="{{ section.media.alt or '' }}" />
+          {% if section.media.caption %}
+            <div class="card-body text-muted small">
+              {{ section.media.caption }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>

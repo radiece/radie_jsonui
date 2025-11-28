@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "title": "Layout Demo"
+  },
+  "pages": [
+    {
+      "path": "index.html",
+      "title": "Layouts",
+      "sections": [
+        {
+          "type": "markdown",
+          "content": "# Layout Components"
+        },
+        {
+          "type": "columns",
+          "columns": [
+            {
+              "width": 6,
+              "sections": [
+                {
+                  "type": "markdown",
+                  "content": "## Left Column\nThis is the left column."
+                }
+              ]
+            },
+            {
+              "width": 6,
+              "sections": [
+                {
+                  "type": "markdown",
+                  "content": "## Right Column\nThis is the right column."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tabs",
+          "items": [
+            {
+              "label": "Tab 1",
+              "sections": [
+                { "type": "markdown", "content": "Content for Tab 1" }
+              ]
+            },
+            {
+              "label": "Tab 2",
+              "sections": [
+                { "type": "markdown", "content": "Content for Tab 2" }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "accordion",
+          "items": [
+            {
+              "title": "Item 1",
+              "sections": [
+                { "type": "markdown", "content": "Content for Item 1" }
+              ]
+            },
+            {
+              "title": "Item 2",
+              "sections": [
+                { "type": "markdown", "content": "Content for Item 2" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

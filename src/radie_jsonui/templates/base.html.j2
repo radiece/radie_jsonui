@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="{{ meta.language or 'en' }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ meta.title }}</title>
+    {% if meta.description -%}
+    <meta name="description" content="{{ meta.description }}" />
+    {% endif -%}
+    {% if meta.og_image -%}
+    <meta property="og:image" content="{{ meta.og_image }}" />
+    {% endif -%}
+    <link rel="stylesheet" href="{{ assets.bootstrap_css }}" />
+    <link rel="stylesheet" href="{{ assets.prism_css }}" />
+    <link rel="stylesheet" href="assets/custom.css" />
+    <style>
+      :root {
+        --json2ui-primary: {{ theme.colors.primary }};
+        --json2ui-secondary: {{ theme.colors.secondary }};
+        --json2ui-surface: {{ theme.colors.surface }};
+        --json2ui-muted: {{ theme.colors.muted }};
+        --json2ui-font: "{{ theme.typography.font_family }}";
+        --json2ui-font-headings: "{{ theme.typography.headings_font }}";
+        --json2ui-base-size: {{ theme.typography.base_size }};
+        --json2ui-radius: {{ theme.layout.radius }};
+        --json2ui-gutter: {{ theme.layout.gutter }};
+        --json2ui-max-width: {{ theme.layout.max_width }};
+      }
+    </style>
+  </head>
+  <body class="bg-body-tertiary">
+    {% if navigation -%}
+      {% include "components/nav.html.j2" %}
+    {% endif -%}
+    <main class="py-5">
+      <div class="container">
+        {% from "macros/render.html.j2" import render_section %}
+        {% for section in sections %}
+          {{ render_section(section) }}
+        {% endfor %}
+      </div>
+    </main>
+    {% if footer -%}
+      {% include "components/footer.html.j2" %}
+    {% endif -%}
+    <script src="{{ assets.bootstrap_js }}"></script>
+    <script src="{{ assets.prism_js }}"></script>
+  </body>
+</html>
